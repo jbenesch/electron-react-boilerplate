@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
+  "name": "boomtown-consumer",
+  "productName": "BoomTown Consumer",
   "version": "0.7.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "BoomTown Consumer Application For CI",
   "main": "main.js",
   "scripts": {
     "test": "better-npm-run test",
@@ -11,6 +11,7 @@
     "lint": "eslint app test *.js",
     "hot-server": "node server.js",
     "build": "better-npm-run build",
+    "build-schema": "babel-node scripts/updateSchema.js",
     "start": "better-npm-run start",
     "start-hot": "better-npm-run start-hot",
     "package": "better-npm-run package",
@@ -84,6 +85,7 @@
   "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
   "devDependencies": {
     "asar": "^0.9.0",
+    "babel-cli": "^6.4.0",
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.0",
@@ -93,6 +95,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.3.13",
     "better-npm-run": "0.0.5",
     "chai": "^3.3.0",
     "chromedriver": "^2.19.0",
@@ -134,7 +137,9 @@
   "dependencies": {
     "dotenv": "^1.2.0",
     "electron-debug": "^0.5.1",
+    "express-graphql": "^0.4.5",
     "font-awesome": "^4.4.0",
+    "graphql": "^0.4.14",
     "history": "^1.17.0",
     "mysql": "^2.10.0",
     "normalize-css": "^2.3.1",

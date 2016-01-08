@@ -1,0 +1,8 @@
+type Blog {
+  id: Int
+  host: String
+}
+
+type BoomTown {
+  blog(id: String!, host: String!): Blog
+}

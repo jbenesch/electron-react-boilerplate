@@ -10,7 +10,41 @@ const shell = electron.shell;
 let menu;
 let template;
 let mainWindow = null;
+let graphiql = null;
 
+const path = require('path');
+const express = require('express');
+const webpack = require('webpack');
+const config = require('./webpack.config.development');
+const graphqlHTTP = require('express-graphql');
+const devMiddleware = require('webpack-dev-middleware');
+const hotMiddleware = require('webpack-hot-middleware');
+
+const schema = require('./app/schema/schema.js');
+const server = express();
+const compiler = webpack(config);
+const PORT = 3000;
+const compilerOptions = {
+  publicPath: config.output.publicPath,
+  stats: {
+    colors: true
+  }
+};
+
+server.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+server.use(devMiddleware(compiler, compilerOptions));
+server.use(hotMiddleware(compiler));
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'hot-dev-app.html'));
+});
+
+server.listen(PORT, 'localhost', err => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(`Listening at http://localhost:${PORT}`);
+});
 
 crashReporter.start();
 
@@ -18,11 +52,9 @@ if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
 }
 
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
-
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
@@ -43,9 +75,9 @@ app.on('ready', () => {
 
   if (process.platform === 'darwin') {
     template = [{
-      label: 'Electron',
+      label: 'BoomTown',
       submenu: [{
-        label: 'About ElectronReact',
+        label: 'About Consumer Team',
         selector: 'orderFrontStandardAboutPanel:'
       }, {
         type: 'separator'
@@ -122,6 +154,16 @@ app.on('ready', () => {
         accelerator: 'Alt+Command+I',
         click() {
           mainWindow.toggleDevTools();
+        }
+      }, {
+        label: 'Show GraphiQL',
+        accelerator: 'Command+G',
+        click() {
+          graphiql = new BrowserWindow({ width: 1024, height: 728 });
+          graphiql.loadURL(`http://localhost:3000/graphql`);
+          graphiql.on('closed', () => {
+            graphiql = null;
+          });
         }
       }] : [{
         label: 'Toggle Full Screen',
