@@ -5,7 +5,7 @@ const Blog = new graphql.GraphQLObjectType({
   description: `A Wordpress Blog`,
   fields: () => ({
     id: {
-      type: graphql.GraphQLInt,
+      type: graphql.GraphQLString,
       description: `Unique Blog ID`,
       resolve: (row) => row.blog_id
     },

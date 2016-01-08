@@ -68,7 +68,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
 
   if (process.env.HOT) {
-    mainWindow.loadURL(`http://localhost:3000/app/hot-dev-app.html`);
+    mainWindow.loadURL(`http://localhost:3000/`);
   } else {
     mainWindow.loadURL(`file://${__dirname}/app/app.html`);
   }

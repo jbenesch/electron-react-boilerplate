@@ -1,5 +1,5 @@
 type Blog {
-  id: Int
+  id: String
   host: String
 }
 
