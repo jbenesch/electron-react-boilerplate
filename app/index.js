@@ -1,26 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { hashHistory } from 'react-router';
+import { RelayRouter } from 'react-router-relay';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.css';
 
 const store = configureStore({ counter: 10 });
 
-setTimeout(() => {
-  const mysql = require('remote').require('./app/api/mysql');
-  mysql.allBlogs((err, data) => {
-    console.log(typeof data);
-  });
-}, 10000);
-
-
 render(
   <Provider store={store}>
-    <Router>
-      {routes}
-    </Router>
+    <RelayRouter history={hashHistory} routes={routes} />
   </Provider>,
   document.getElementById('root')
 );

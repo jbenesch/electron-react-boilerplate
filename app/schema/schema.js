@@ -23,16 +23,6 @@ const boomtown = new graphql.GraphQLObjectType({
     blog: {
       type: Blog,
       description: `Retrieve the details of a blog`,
-      args: {
-        id: {
-          type: new graphql.GraphQLNonNull(graphql.GraphQLString),
-          description: `Blog ID`
-        },
-        host: {
-          type: new graphql.GraphQLNonNull(graphql.GraphQLString),
-          description: `Blog Hostname`
-        }
-      },
       resolve: () => {
         return { blog_id: 3, host: 'www.thecassinagroup.dev' };
       }
@@ -43,3 +33,16 @@ const boomtown = new graphql.GraphQLObjectType({
 module.exports = new graphql.GraphQLSchema({
   query: boomtown
 });
+
+/*
+args: {
+        id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLString),
+          description: `Blog ID`
+        },
+        host: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLString),
+          description: `Blog Hostname`
+        }
+      },
+      */

@@ -4,5 +4,5 @@ type Blog {
 }
 
 type BoomTown {
-  blog(id: String!, host: String!): Blog
+  blog: Blog
 }

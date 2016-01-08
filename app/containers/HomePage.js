@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import Relay from 'react-relay';
 import Home from '../components/Home';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   render() {
     return (
-      <Home />
+      <div>
+        {this.props.blog.id}
+      </div>
     );
   }
 }
+
+export default Relay.createContainer(HomePage, {
+  fragments: {
+    blog: () => Relay.QL`
+      fragment on Blog {
+        id
+        host
+      }
+    `,
+  },
+});

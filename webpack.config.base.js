@@ -7,7 +7,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['babel-loader'],
+      loaders: ['babel-loader?plugins=./scripts/babelRelayPlugin'],
       exclude: /node_modules/
     }]
   },

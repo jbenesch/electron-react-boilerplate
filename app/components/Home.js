@@ -1,52 +1,33 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import styles from './Home.module.css';
+import React, { Component, PropTypes } from 'react';
+import Relay from 'react-relay';
+// import { Link } from 'react-router';
+// import styles from './Home.module.css';
 
+class Home extends Component {
+  static propTypes = {
+    id: PropTypes.number,
+    host: PropTypes.string
+  };
 
-export default class Home extends Component {
   render() {
+    const { id, host } = this.props;
     return (
       <div>
-      <table className="table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Kind</th>
-      <th>File Size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>photon.css</td>
-      <td>CSS</td>
-      <td>28K</td>
-    </tr>
-    <tr>
-      <td>photon.css</td>
-      <td>CSS</td>
-      <td>28K</td>
-    </tr>
-    <tr>
-      <td>photon.css</td>
-      <td>CSS</td>
-      <td>28K</td>
-    </tr>
-    ...
-    <tr>
-      <td>photon.css</td>
-      <td>CSS</td>
-      <td>28K</td>
-    </tr>
-  </tbody>
-</table>
-        <div className={styles.container}>
-          <h2>Home</h2>
-          <ul>
-            <li><Link to="/counter">to Counter</Link></li>
-            <li><Link to="/blogs">to Blogs</Link></li>
-          </ul>
-        </div>
+        <h1>Hello World</h1>
+        <h1>{id}</h1>
+        <h1>{host}</h1>
       </div>
     );
   }
 }
+
+export default Relay.createContainer(Home, {
+  fragments: {
+    blog: () => Relay.QL`
+      fragment on Blog {
+        id
+        host
+      }
+    `,
+  },
+});

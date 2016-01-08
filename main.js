@@ -1,16 +1,5 @@
-/* eslint strict: 0 */
+/* eslint strict: 0 no-console: 0 */
 'use strict';
-
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const crashReporter = electron.crashReporter;
-const shell = electron.shell;
-let menu;
-let template;
-let mainWindow = null;
-let graphiql = null;
 
 const path = require('path');
 const express = require('express');
@@ -46,7 +35,26 @@ server.listen(PORT, 'localhost', err => {
   console.log(`Listening at http://localhost:${PORT}`);
 });
 
-crashReporter.start();
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const shell = electron.shell;
+
+let menu;
+let template;
+let mainWindow = null;
+let graphiql = null;
+
+/*
+// const crashReporter = electron.crashReporter;
+crashReporter.start({
+  productName: 'Consumer',
+  companyName: 'BoomTown',
+  submitURL: 'https://your-domain.com/url-to-submit',
+  autoSubmit: true
+});
+*/
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')();
@@ -60,7 +68,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
 
   if (process.env.HOT) {
-    mainWindow.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
+    mainWindow.loadURL(`http://localhost:3000/app/hot-dev-app.html`);
   } else {
     mainWindow.loadURL(`file://${__dirname}/app/app.html`);
   }
