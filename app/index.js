@@ -6,7 +6,15 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.css';
 
-const store = configureStore();
+const store = configureStore({ counter: 10 });
+
+setTimeout(() => {
+  const mysql = require('remote').require('./app/api/mysql');
+  mysql.allBlogs((err, data) => {
+    console.log(typeof data);
+  });
+}, 10000);
+
 
 render(
   <Provider store={store}>
@@ -16,11 +24,3 @@ render(
   </Provider>,
   document.getElementById('root')
 );
-
-if (process.env.NODE_ENV !== 'production') {
-  // Use require because imports can't be conditional.
-  // In production, you should ensure process.env.NODE_ENV
-  // is envified so that Uglify can eliminate this
-  // module and its dependencies as dead code.
-  // require('./createDevToolsWindow')(store);
-}

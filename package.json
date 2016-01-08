@@ -132,9 +132,13 @@
     "webpack-target-electron-renderer": "^0.3.0"
   },
   "dependencies": {
+    "dotenv": "^1.2.0",
     "electron-debug": "^0.5.1",
     "font-awesome": "^4.4.0",
     "history": "^1.17.0",
+    "mysql": "^2.10.0",
+    "normalize-css": "^2.3.1",
+    "php-unserialize": "0.0.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.5",
