@@ -3,6 +3,10 @@ import React, { Component, PropTypes } from 'react';
 // import styles from './Home.module.css';
 
 export default class Home extends Component {
+  static propTypes = {
+    blog: PropTypes.element.isRequired
+  };
+
   render() {
     const { id, host } = this.props.blog;
     return (

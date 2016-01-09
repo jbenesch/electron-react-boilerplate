@@ -137,6 +137,7 @@
   "dependencies": {
     "dotenv": "^1.2.0",
     "electron-debug": "^0.5.1",
+    "es6-promise": "^3.0.2",
     "express-graphql": "^0.4.5",
     "font-awesome": "^4.4.0",
     "graphql": "^0.4.14",
